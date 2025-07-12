@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <title>คำนวณค่าดัชนีมวลกาย (BMI)</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: #f0f8ff;
+      text-align: center;
+      padding: 40px;
+    }
+    input, button {
+      padding: 10px;
+      margin: 10px;
+      font-size: 16px;
+    }
+    #result {
+      font-size: 20px;
+      color: #006600;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>เครื่องคำนวณค่าดัชนีมวลกาย (BMI)</h1>
+  <p>กรอกน้ำหนักและส่วนสูงของคุณ</p>
+  <label>น้ำหนัก (กิโลกรัม): <input id="weight" type="number"></label><br>
+  <label>ส่วนสูง (เซนติเมตร): <input id="height" type="number"></label><br>
+  <button onclick="calculateBMI()">คำนวณ</button>
+  <h2 id="result"></h2>
+
+  <script>
+    function calculateBMI() {
+      const weight = parseFloat(document.getElementById('weight').value);
+      const height = parseFloat(document.getElementById('height').value) / 100;
+
+      if (!weight || !height) {
+        document.getElementById('result').innerText = "กรุณากรอกน้ำหนักและส่วนสูงให้ครบ";
+        return;
+      }
+
+      const bmi = weight / (height * height);
+      let category = "";
+
+      if (bmi < 18.5) {
+        category = "ผอม";
+      } else if (bmi < 24.9) {
+        category = "ปกติ";
+      } else if (bmi < 29.9) {
+        category = "น้ำหนักเกิน";
+      } else {
+        category = "อ้วน";
+      }
+
+      document.getElementById('result').innerText =
+        `ค่า BMI ของคุณคือ ${bmi.toFixed(2)} → คุณอยู่ในเกณฑ์: ${category}`;
+    }
+  </script>
+</body>
+</html>
